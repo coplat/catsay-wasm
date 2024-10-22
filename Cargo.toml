@@ -1,12 +1,11 @@
 [package]
 name = "meowed-away"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 authors = ["Chaya <chaya@example.com>"]
 description = "Don't Get Meowed Away"
 license = "MIT/Apache-2.0"
 repository = "https://github.com/coplat/meowed-away"
-edition = "2024"
 
 [lib]
 crate-type = ["cdylib"]
