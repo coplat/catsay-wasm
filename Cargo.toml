@@ -5,7 +5,7 @@ edition = "2021"
 authors = ["Chaya <chaya@example.com>"]
 description = "Don't Get Meowed Away"
 license = "MIT/Apache-2.0"
-repository = "https://github.com/coplat/meowed-away
+repository = "https://github.com/coplat/meowed-away"
 edition = "2024"
 
 [lib]
