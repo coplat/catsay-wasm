@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cats....say? </title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: monospace;
+        }
+        #loading, #ascii-bubble {
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="landing">
+        <h1>Enter a little message....:</h1>
+        <input type="text" id="message-input" placeholder="Enter a little message...">
+        <button id="submit-btn">Submit</button>
+    </div>
+    <div id="loading">
+        <h1>Loading...</h1>
+        <div id="countdown">3</div>
+    </div>
+    <div id="ascii-bubble"></div>
+
+    <script type="module">
+        import init, { countdown_then_show_message } from './pkg/meowed_away.js';
+
+        async function run() {
+            await init();
+
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.addEventListener('click', () => {
+                const message = document.getElementById('message-input').value;
+
+                
+                document.getElementById('landing').style.display = 'none';
+                document.getElementById('loading').style.display = 'block';
+
+                
+                countdown_then_show_message(message);
+            });
+        }
+
+        run();
+    </script>
+</body>
+</html>
