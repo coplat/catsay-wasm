@@ -3,11 +3,12 @@ use web_sys::window;
 use wasm_bindgen::JsCast;
 use std::fmt::Write;
 
+
 #[wasm_bindgen]
 pub fn generate_ascii_bubble(message: &str) -> String {
     let mut bubble = String::new();
     let length = message.len() + 4; // padding around message
-    
+  
     // top border
     let _ = writeln!(bubble, " {}", "-".repeat(length));
     // Message with padding
@@ -48,7 +49,7 @@ pub fn countdown_then_show_message(message: String) {
             let ascii_bubble = generate_ascii_bubble(&message);
             body.set_inner_html(&format!("<pre>{}</pre>", ascii_bubble));
 
-            // hide loading screen and show the message
+            // loading screen and show the message
             document.get_element_by_id("loading").unwrap().set_attribute("style", "display: none;").unwrap();
             document.get_element_by_id("ascii-bubble").unwrap().set_inner_html(&format!("<pre>{}</pre>", ascii_bubble));
         }
