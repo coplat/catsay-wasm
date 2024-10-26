@@ -44,21 +44,21 @@ pub fn countdown_then_show_message(message: String) {
             countdown_element.set_inner_html(&countdown_value.to_string());
             countdown_value -= 1;
         } else {
-            // After countdown, show the ASCII bubble
+            // After countdown show the ASCII bubble
             let ascii_bubble = generate_ascii_bubble(&message);
             body.set_inner_html(&format!("<pre>{}</pre>", ascii_bubble));
 
-            // Hide the loading screen and show the message
+            // hide loading screen and show the message
             document.get_element_by_id("loading").unwrap().set_attribute("style", "display: none;").unwrap();
             document.get_element_by_id("ascii-bubble").unwrap().set_inner_html(&format!("<pre>{}</pre>", ascii_bubble));
         }
     }) as Box<dyn FnMut()>);
 
-    // update the countdown every 1 second (1000 ms)
+    // update the countdown every 1 sec
     let interval_id = window
         .set_interval_with_callback_and_timeout_and_arguments_0(
             closure.as_ref().unchecked_ref(), 
-            1000  // 1 second interval
+            700  // 1 second interval
         )
         .expect("Should register `setInterval` OK");
 
