@@ -1,0 +1,24 @@
+{
+  "name": "meowed-away",
+  "type": "module",
+  "collaborators": [
+    "Chaya <chaya@example.com>"
+  ],
+  "description": "Don't Get Meowed Away",
+  "version": "0.1.0",
+  "license": "MIT/Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coplat/meowed-away"
+  },
+  "files": [
+    "meowed_away_bg.wasm",
+    "meowed_away.js",
+    "meowed_away.d.ts"
+  ],
+  "main": "meowed_away.js",
+  "types": "meowed_away.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
