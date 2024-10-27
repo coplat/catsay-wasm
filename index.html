@@ -20,6 +20,8 @@
         #loading, #ascii-bubble {
             display: none;
             text-align: center;
+            overflow-x: auto; /* Adds a horizontal scrollbar if the ASCII art overflows */
+    max-width: 100vw;
         }
         .footer {
             position: fixed;
@@ -43,12 +45,12 @@
 </head>
 <body>
     <div id="landing">
-        <h1>Who says? 🐈‍⬛ </h1>
+        <h1>Who says? </h1>
         <select id="animal-select">
-            <option value="cat">Cat</option>
-            <option value="cow">Cow</option>
-            <option value="dog">Dog</option>
-            <option value="monkey">Monkey</option>
+            <option value="cat">Catsays 🐈‍</option>
+            <option value="fish">Fishsays 🐟</option>
+            <option value="dog">Dogsays 🐕</option>
+            <option value="monkey">Monkeysays 🐒 </option>
         </select><br>
         <input type="text" id="message-input" placeholder="What should they say?">
         <button id="submit-btn">Submit</button>

@@ -261,7 +261,7 @@ function handleError(f, args) {
     }
 }
 
-export const Animal = Object.freeze({ Cat:0,"0":"Cat",Cow:1,"1":"Cow",Dog:2,"2":"Dog",Monkey:3,"3":"Monkey", });
+export const Animal = Object.freeze({ Cat:0,"0":"Cat",Fish:1,"1":"Fish",Dog:2,"2":"Dog",Monkey:3,"3":"Monkey", });
 
 async function __wbg_load(module, imports) {
     if (typeof Response === 'function' && module instanceof Response) {

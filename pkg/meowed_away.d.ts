@@ -13,7 +13,7 @@ export function generate_ascii_bubble(message: string, selected_animal: string):
 export function countdown_then_show_message(message: string, animal_type: string): void;
 export enum Animal {
   Cat = 0,
-  Cow = 1,
+  Fish = 1,
   Dog = 2,
   Monkey = 3,
 }
