@@ -3,32 +3,75 @@ use web_sys::window;
 use wasm_bindgen::JsCast;
 use std::fmt::Write;
 
+#[wasm_bindgen]
+#[derive(Clone)]
+pub enum Animal {
+    Cat,
+    Cow,
+    Dog,
+    Monkey
+}
 
 #[wasm_bindgen]
-pub fn generate_ascii_bubble(message: &str) -> String {
+pub fn generate_ascii_bubble(message: &str, selected_animal: &str) -> String {  // added selected_animal parameter
     let mut bubble = String::new();
     let length = message.len() + 4; // padding around message
-  
+
     // top border
     let _ = writeln!(bubble, " {}", "-".repeat(length));
     // Message with padding
     let _ = writeln!(bubble, "< {} >", message);
-    // bottom 
+    // bottom
     let _ = writeln!(bubble, " {}", "-".repeat(length));
-// cat
-    let _ = writeln!(bubble, "     \\");
-    let _ = writeln!(bubble, "      |\\---/|");
-    let _ = writeln!(bubble, "      | ,_, |");
-    let _ = writeln!(bubble, "       \\_`_/-..----.");
-    let _ = writeln!(bubble, "    ___/ `   ' ,//+ \\  sk");
-    let _ = writeln!(bubble, "   (__...'   **\\    |`.**_.';");
-    let _ = writeln!(bubble, "     (_,...'(_,.`__)/'.....+\")");
     
+    // Now we can match on selected_animal
+    let ascii_art = match selected_animal {
+        "cat" => String::from(
+            " |\\\\---/|\n\
+             | ,*, |\n\
+             \\\\*`_/-..----.\n\
+             *__/ ` ' ,//+ \\\\ sk\n\
+             (*_...' **\\\\ |`.**_.'\n\
+             (*,...'(_,.`__)/'.....+\")"
+        ),
+        "cow" => String::from(
+            "        \\\\   ^__^\n\
+                     \\\\  (oo)\\\\_______\n\
+                        (__)\\\\       )\\\\/\\\\\n\
+                            ||----w |\n\
+                            ||     ||"
+        ),
+        "dog" => String::from(
+            "    ''',\n\
+        o_)O \\)____)\n\
+         \\_        )\n\
+           '',,,,,,\n\
+             ||  ||\n\
+            \"--'\"--'\"\n\
+                )"
+        ),
+        "monkey" => String::from(
+            "  /\\\\___/\\\\\n\
+             (  o o  )\n\
+             (  =^=  )\n\
+              (m___m)"
+        ),
+        _ => String::from(  // Default to cat if unknown animal type
+            " |\\\\---/|\n\
+             | ,*, |\n\
+             \\\\*`_/-..----.\n\
+             *__/ ` ' ,//+ \\\\ sk\n\
+             (*_...' **\\\\ |`.**_.'\n\
+             (*,...'(_,.`__)/'.....+\")"
+        )
+    };
+    
+    bubble.push_str(&ascii_art);
     bubble
 }
 
 #[wasm_bindgen]
-pub fn countdown_then_show_message(message: String) {
+pub fn countdown_then_show_message(message: String, animal_type: String) {  // Added animal_type parameter
     let window = window().expect("no global `window` exists");
     let document = window.document().expect("should have a document on window");
     let body = document.body().expect("document should have a body");
@@ -36,32 +79,22 @@ pub fn countdown_then_show_message(message: String) {
         .get_element_by_id("countdown")
         .expect("No countdown element found");
 
-    // Mutable countdown value, starts at 3
     let mut countdown_value = 3;
-
     let closure = Closure::wrap(Box::new(move || {
         if countdown_value > 0 {
-            // Update the countdown value in the HTML
             countdown_element.set_inner_html(&countdown_value.to_string());
             countdown_value -= 1;
         } else {
-            // After countdown show the ASCII bubble
-            let ascii_bubble = generate_ascii_bubble(&message);
+            let ascii_bubble = generate_ascii_bubble(&message, &animal_type);  
             body.set_inner_html(&format!("<pre>{}</pre>", ascii_bubble));
-
-            // loading screen and show the message
-            document.get_element_by_id("loading").unwrap().set_attribute("style", "display: none;").unwrap();
+            document.get_element_by_id("loading").unwrap().set_attribute("style", "display: none").unwrap();
             document.get_element_by_id("ascii-bubble").unwrap().set_inner_html(&format!("<pre>{}</pre>", ascii_bubble));
         }
     }) as Box<dyn FnMut()>);
 
-    // update the countdown every 1 sec
-    let interval_id = window
-        .set_interval_with_callback_and_timeout_and_arguments_0(
-            closure.as_ref().unchecked_ref(), 
-            700  // 1 second interval
-        )
-        .expect("Should register `setInterval` OK");
-
-    closure.forget();  // Avoid premature closure deallocation
+    let _ = window.set_interval_with_callback_and_timeout_and_arguments_0(
+        closure.as_ref().unchecked_ref(),
+        700
+    );
+    closure.forget();
 }

@@ -213,34 +213,40 @@ function __wbg_adapter_12(arg0, arg1) {
 
 /**
  * @param {string} message
+ * @param {string} selected_animal
  * @returns {string}
  */
-export function generate_ascii_bubble(message) {
-    let deferred2_0;
-    let deferred2_1;
+export function generate_ascii_bubble(message, selected_animal) {
+    let deferred3_0;
+    let deferred3_1;
     try {
         const retptr = wasm.__wbindgen_add_to_stack_pointer(-16);
         const ptr0 = passStringToWasm0(message, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
         const len0 = WASM_VECTOR_LEN;
-        wasm.generate_ascii_bubble(retptr, ptr0, len0);
+        const ptr1 = passStringToWasm0(selected_animal, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+        const len1 = WASM_VECTOR_LEN;
+        wasm.generate_ascii_bubble(retptr, ptr0, len0, ptr1, len1);
         var r0 = getDataViewMemory0().getInt32(retptr + 4 * 0, true);
         var r1 = getDataViewMemory0().getInt32(retptr + 4 * 1, true);
-        deferred2_0 = r0;
-        deferred2_1 = r1;
+        deferred3_0 = r0;
+        deferred3_1 = r1;
         return getStringFromWasm0(r0, r1);
     } finally {
         wasm.__wbindgen_add_to_stack_pointer(16);
-        wasm.__wbindgen_free(deferred2_0, deferred2_1, 1);
+        wasm.__wbindgen_free(deferred3_0, deferred3_1, 1);
     }
 }
 
 /**
  * @param {string} message
+ * @param {string} animal_type
  */
-export function countdown_then_show_message(message) {
+export function countdown_then_show_message(message, animal_type) {
     const ptr0 = passStringToWasm0(message, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
     const len0 = WASM_VECTOR_LEN;
-    wasm.countdown_then_show_message(ptr0, len0);
+    const ptr1 = passStringToWasm0(animal_type, wasm.__wbindgen_malloc, wasm.__wbindgen_realloc);
+    const len1 = WASM_VECTOR_LEN;
+    wasm.countdown_then_show_message(ptr0, len0, ptr1, len1);
 }
 
 function isLikeNone(x) {
@@ -254,6 +260,8 @@ function handleError(f, args) {
         wasm.__wbindgen_exn_store(addHeapObject(e));
     }
 }
+
+export const Animal = Object.freeze({ Cat:0,"0":"Cat",Cow:1,"1":"Cow",Dog:2,"2":"Dog",Monkey:3,"3":"Monkey", });
 
 async function __wbg_load(module, imports) {
     if (typeof Response === 'function' && module instanceof Response) {
@@ -366,7 +374,7 @@ function __wbg_get_imports() {
     imports.wbg.__wbindgen_throw = function(arg0, arg1) {
         throw new Error(getStringFromWasm0(arg0, arg1));
     };
-    imports.wbg.__wbindgen_closure_wrapper22 = function(arg0, arg1, arg2) {
+    imports.wbg.__wbindgen_closure_wrapper25 = function(arg0, arg1, arg2) {
         const ret = makeMutClosure(arg0, arg1, 3, __wbg_adapter_12);
         return addHeapObject(ret);
     };

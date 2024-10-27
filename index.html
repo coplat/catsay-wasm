@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <script type="module" src=".meowed_away_bg.js"></script>
-
 <head>
     <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cats....say? </title>
+    <title>who-says</title>
     <style>
         body, html {
             margin: 0;
@@ -22,26 +21,36 @@
             display: none;
             text-align: center;
         }
-
-        .footer{ 
-          position: fixed;     
-          text-align: left;    
-          bottom: 0px; 
-          width: 100%;
-          padding-left: 10px;
-          padding-bottom: 4px;
-          font-family: monospace;
-          color: black;
-          
-
-
-      } 
+        .footer {
+            position: fixed;
+            text-align: left;
+            bottom: 0px;
+            width: 100%;
+            padding-left: 10px;
+            padding-bottom: 4px;
+            font-family: monospace;
+            color: black;
+        }
+        select {
+            margin: 10px 0;
+            padding: 5px;
+            font-family: monospace;
+        }
+        #landing {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <div id="landing">
-        <h1>This cat talks back! 🐈‍⬛</h1>
-        <input type="text" id="message-input" placeholder="What should he say?">
+        <h1>Who says? 🐈‍⬛ </h1>
+        <select id="animal-select">
+            <option value="cat">Cat</option>
+            <option value="cow">Cow</option>
+            <option value="dog">Dog</option>
+            <option value="monkey">Monkey</option>
+        </select><br>
+        <input type="text" id="message-input" placeholder="What should they say?">
         <button id="submit-btn">Submit</button>
     </div>
     <div id="loading">
@@ -49,28 +58,24 @@
         <div id="countdown"></div>
     </div>
     <div id="ascii-bubble"></div>
-
     <script type="module">
         import init, { countdown_then_show_message } from './pkg/meowed_away.js';
-
+        
         async function run() {
             await init();
-
             const submitBtn = document.getElementById('submit-btn');
             submitBtn.addEventListener('click', () => {
                 const message = document.getElementById('message-input').value;
-
-                
+                const animalType = document.getElementById('animal-select').value;
                 document.getElementById('landing').style.display = 'none';
                 document.getElementById('loading').style.display = 'block';
-
-                
-                countdown_then_show_message(message);
+                countdown_then_show_message(message, animalType);
             });
         }
-
         run();
     </script>
-<div class="footer"> <a href="https://github.com/coplat/catsay-wasm/blob/master/README.md" target="_blank">info</a> </div>
+    <div class="footer">
+        <a href="https://github.com/coplat/catsay-wasm/blob/master/README.md" target="_blank">info</a>
+    </div>
 </body>
 </html>

@@ -2,20 +2,28 @@
 /* eslint-disable */
 /**
  * @param {string} message
+ * @param {string} selected_animal
  * @returns {string}
  */
-export function generate_ascii_bubble(message: string): string;
+export function generate_ascii_bubble(message: string, selected_animal: string): string;
 /**
  * @param {string} message
+ * @param {string} animal_type
  */
-export function countdown_then_show_message(message: string): void;
+export function countdown_then_show_message(message: string, animal_type: string): void;
+export enum Animal {
+  Cat = 0,
+  Cow = 1,
+  Dog = 2,
+  Monkey = 3,
+}
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly generate_ascii_bubble: (a: number, b: number, c: number) => void;
-  readonly countdown_then_show_message: (a: number, b: number) => void;
+  readonly generate_ascii_bubble: (a: number, b: number, c: number, d: number, e: number) => void;
+  readonly countdown_then_show_message: (a: number, b: number, c: number, d: number) => void;
   readonly __wbindgen_malloc: (a: number, b: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
   readonly __wbindgen_export_2: WebAssembly.Table;
