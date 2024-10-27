@@ -1,5 +1,3 @@
-A super simple feline take on _cowsay_ as a web application! 
-I built this using Rust and wasm, without much .js knowledge, will be adding more features to it shortly! 
+A slightly more interactive take on the classic cowsay program as a web application. Built using Rust and WebAssembly, you can choose from several creatures!
 
-
-https://coplat.github.io/catsay-wasm/
+[Try it here! 🐈‍⬛ ](https://coplat.github.io/catsay-wasm/) 
